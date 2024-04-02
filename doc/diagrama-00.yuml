@@ -1,0 +1,25 @@
+// {type:class}
+// {direction:leftToRight}
+// {generate:true}
+
+
+
+[ProyectoGobernacion]
+[<<enum>>;Municipio|ARMENIA(0.0);CALARCA(10000.0);MONTENEGRO(20000.0);QUIMBAYA(30000.0);TEBAIDA(15000.0);CIRCASIA(18000.0);FILANDIA(22000.0);GENOVA(70000.0);SALENTO(50000.0);PIJAO(40000.0);CORDOBA(30000.0);BUENAVISTA(35000.0)]
+[<<enum>>;Material|ARENA(10000.0);GRAMA_SINTETICA(35000.0);GRAMA_NATURAL(20000.0);ASFALTO(40000.0)]
+[ParqueInfantil|-nombre:Texto]
+[ZonasParque|-nombre:Texto]
+[Circulo|-radio:Real]
+[Rectangulo|-ancho:Real;alto:Real]
+[TrianguloRectangulo|-base:Real;-altura:Real]
+
+[ProyectoGobernacion]<>1-*>[ParqueInfantil]
+[ParqueInfantil]*-1>[<<enum>>;Municipio]
+
+[ParqueInfantil]<>1-*>[ZonasParque]
+[ZonasParque]*-1>[<<abstract>>;FiguraGeometrica]
+[ZonasParque]*-1>[<<enum>>;Material]
+[<<abstract>>;FiguraGeometrica]^-[Circulo]
+[<<abstract>>;FiguraGeometrica]^-[Rectangulo]
+[<<abstract>>;FiguraGeometrica]^-[TrianguloRectangulo]
+[Rectangulo]^-[Cuadrado]
