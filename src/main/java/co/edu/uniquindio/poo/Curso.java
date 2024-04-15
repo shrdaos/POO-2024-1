@@ -1,9 +1,9 @@
 package co.edu.uniquindio.poo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.function.Predicate;
 
 /**
  * Registro que agrupa los datos de un Curso
@@ -124,8 +124,12 @@ public class Curso {
      * @return colección de los estudiantes que asistieron a una clase interés
      */
     public Collection<Estudiante> getAsistentes(ClaseCurso claseCurso) {
-        Predicate<Estudiante> asistioClase = j -> j.asistioClase(claseCurso);
-        var asistentes = estudiantes.stream().filter(asistioClase).toList();
+        ArrayList<Estudiante> asistentes = new ArrayList<>();
+        for (Estudiante estudiante : estudiantes) {
+            if(estudiante.asistioClase(claseCurso))
+                asistentes.add(estudiante);
+            
+        }
         return asistentes;
     }
 
@@ -138,19 +142,23 @@ public class Curso {
      *         interés
      */
     public Collection<Estudiante> getAusentes(ClaseCurso claseCurso) {
-        Predicate<Estudiante> asistioClase = j -> !j.asistioClase(claseCurso);
-        var asistentes = estudiantes.stream().filter(asistioClase).toList();
-        return asistentes;
+        ArrayList<Estudiante> ausentes = new ArrayList<>();
+        for (Estudiante estudiante : estudiantes) {
+            if(!estudiante.asistioClase(claseCurso))
+            ausentes.add(estudiante);
+        }
+        return ausentes;
     }
 
 
     public double calcularPorcentajeAsistencia(ClaseCurso claseCurso) {
         var cantidadEstudiantes = estudiantes.size();
-
-        Predicate<Estudiante> asistioClase = j -> j.asistioClase(claseCurso);
-        var cantidadAsistentes = estudiantes.stream().filter(asistioClase).count();
-
-        return (double) cantidadAsistentes / cantidadEstudiantes;
+        int asistentes = 0;
+        for (Estudiante estudiante : estudiantes) {
+            if(estudiante.asistioClase(claseCurso))
+                asistentes ++;
+        }
+        return (double) asistentes / cantidadEstudiantes;
     }
 
 }
