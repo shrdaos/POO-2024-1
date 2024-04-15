@@ -107,6 +107,7 @@ public class CursoTest {
         curso.agregarEstudiante(xiomara);
         curso.agregarEstudiante(ana);
         curso.agregarEstudiante(yudi);
+        
 
         Collection<Estudiante> listaEsperada = List.of(ana, camila, xiomara, yudi);
 
